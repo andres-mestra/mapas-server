@@ -26,7 +26,9 @@ class Sockets {
             })
 
             socket.on('marcador-actualizado', (marcador) => {
-                
+                this.marcadores.actualizarMarcador(marcador);
+                //notificar a los demas clientes cuando se mueve el marcador
+                socket.broadcast.emit('marcador-actualizado', marcador)
             })
 
             
