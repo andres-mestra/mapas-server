@@ -16,11 +16,19 @@ class Sockets {
         // On connection
         this.io.on('connection', ( socket ) => {
 
-            //TODO: marcadores-activos
+            socket.emit('marcadores-activos', this.marcadores.activos )
 
-            //TODO:marcador-nuevo
+            socket.on('marcador-nuevo', (marcador) => { //{ id, lng, lat }
+                this.marcadores.agregarMarcador( marcador );
+                
+                //notifica a todos los clientes menos al cliente que lo emitio
+                socket.broadcast.emit('marcador-nuevo', marcador)
+            })
 
-            //TODO:marcador-actualizado
+            socket.on('marcador-actualizado', (marcador) => {
+                
+            })
+
             
         
         });
